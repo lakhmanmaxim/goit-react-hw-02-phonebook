@@ -17,6 +17,9 @@ export class App extends Component {
     
     this.setState(prevState => {
       const { name, number, contacts} = prevState;
+      if (this.isDublicateContact(name, number)) {
+        return alert(`The contact "${name}" or number "${number}" alredy exist your contact list. Please, check name or number of contact and try again`)
+      }
       const newContact = {
         id: nanoid(),
         name,
@@ -26,6 +29,16 @@ export class App extends Component {
       return {contacts: [newContact, ...contacts], name: "", number: ""}
     })
   };
+
+  isDublicateContact = (name, number) => {
+    const normalizedName = name.toLowerCase();
+    const phoneNumber = number;
+    const {contacts} = this.state;
+    const contact = contacts.find(({name, number}) => {
+      return (name.toLowerCase() === normalizedName || number === phoneNumber)
+    })
+    return Boolean(contact);
+  }
 
   deleteContact = (id) => {
     this.setState(({contacts}) => {
