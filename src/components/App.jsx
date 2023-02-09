@@ -1,6 +1,10 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import styles from './ContactFrom/contactForm.module.css';
+
+import ContactFilter from './ContactsFilter/ContactsFilter';
+import ContactList from './ContactList/ContactList';
+
+import styles from './ContactForm/contactForm.module.css';
 
 export class App extends Component {
   state = {
@@ -80,20 +84,6 @@ export class App extends Component {
     const { addContact, onInputChange, deleteContact } = this;
     const contacts = this.getFilteredContacts();
 
-    const contact = contacts.map(({ id, name, number }) => (
-      <li key={id} className={styles.list_item}>
-        <p className={styles.item_text}>{name}: </p>
-        <span>{number}</span>
-        <button
-          onClick={() => deleteContact(id)}
-          className={styles.contacts_btn}
-          type="button"
-        >
-          Delete
-        </button>
-      </li>
-    ));
-
     return (
       <div className={styles.wrapper}>
         <form className={styles.form} onSubmit={addContact}>
@@ -140,18 +130,9 @@ export class App extends Component {
         </form>
 
         <div className={styles.contacts}>
-          <label className={styles.contacts_label}>
-            Find contacts:
-            <input
-              onChange={onInputChange}
-              name="filter"
-              className={styles.contacts_input}
-              type="text"
-              placeholder="Enter contact name or phone number"
-            />
-          </label>
-          <h2 className={styles.title}>Contacts</h2>
-          <ol className={styles.contacts_list}>{contact}</ol>
+          <h2 className={styles.title}>Contacts:</h2>
+          <ContactFilter onInputChange={onInputChange}/>
+          <ContactList contacts={contacts} deleteContact={deleteContact} />
         </div>
       </div>
     );
