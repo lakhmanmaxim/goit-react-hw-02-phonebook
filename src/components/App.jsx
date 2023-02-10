@@ -5,7 +5,7 @@ import ContactForm from './ContactForm/ContactForm';
 import ContactFilter from './ContactsFilter/ContactsFilter';
 import ContactList from './ContactList/ContactList';
 
-import contactsArray from "./contactsArray";
+import contactsArray from './contactsArray';
 
 import styles from './ContactForm/contactForm.module.css';
 
@@ -22,7 +22,7 @@ export class App extends Component {
     });
   };
 
-  addContact = ({ name, number }) => {    
+  addContact = ({ name, number }) => {
     const { contacts } = this.state;
 
     if (this.isDublicateContact(name, number)) {
@@ -38,7 +38,7 @@ export class App extends Component {
         number,
       };
 
-      return { contacts: [newContact, ...contacts]};
+      return { contacts: [newContact, ...contacts] };
     });
   };
 
@@ -80,7 +80,7 @@ export class App extends Component {
 
     return (
       <div className={styles.wrapper}>
-        <ContactForm onSubmit={addContact}/>
+        <ContactForm onSubmit={addContact} />
 
         <div className={styles.contacts}>
           <h2 className={styles.title}>Contacts:</h2>

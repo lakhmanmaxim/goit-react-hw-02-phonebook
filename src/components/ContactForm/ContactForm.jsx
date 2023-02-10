@@ -11,7 +11,7 @@ class ContactForm extends Component {
   onFormSubmit = evt => {
     evt.preventDefault();
     const { onSubmit } = this.props;
-    onSubmit({...this.state });
+    onSubmit({ ...this.state });
     this.setState({
       name: '',
       number: '',
